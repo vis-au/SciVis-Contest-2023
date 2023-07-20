@@ -1,0 +1,14 @@
+syntax = "proto3";
+package server;
+
+option go_package = "./server";
+
+service Mock {
+    rpc Stratum (StratumQuery) returns (Response) {}
+}
+
+message StratumQuery {}
+
+message Response {
+    repeated float data = 1;
+}

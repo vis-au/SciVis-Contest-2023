@@ -1,0 +1,17 @@
+Pipfile.lock
+*_pb2*.py*
+data
+docs/
+playground/
+visualize_communities/plots/
+**/__pycache__/
+*.pb.go
+build/
+go.work
+go.work.sum
+community_detection/degree_distribution_images/
+*pickle
+*gexf
+*.dot
+*.edges
+zorder/*.mp4

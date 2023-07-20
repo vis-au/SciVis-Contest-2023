@@ -1,0 +1,384 @@
+{
+    "name": "CustomActions",
+    "maps": [
+        {
+            "name": "BrainViz",
+            "id": "95113210-b202-4451-9697-127c70991a99",
+            "actions": [
+                {
+                    "name": "Flying",
+                    "type": "Button",
+                    "id": "45ab311c-1125-4848-9ffe-1b54728f53b2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Rotation",
+                    "type": "PassThrough",
+                    "id": "e4aa6aae-69c0-46f3-8b7e-fa35259c0c27",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "OneHandedFlying",
+                    "type": "PassThrough",
+                    "id": "8cda564e-dd6d-4dc0-9e62-319d78a381fa",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "1D Axis",
+                    "id": "040f4b06-81a0-49a2-926c-0dff894e5f50",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Flying",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "2df75328-476d-4e89-8779-135fe647b694",
+                    "path": "<XRController>{LeftHand}/gripButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Flying",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "2a5ee611-6e01-47bf-8a19-706a9178911e",
+                    "path": "<XRController>{RightHand}/gripButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Flying",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "One Modifier",
+                    "id": "c2fa21bc-d639-4316-a9d9-481f8301d209",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotation",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "binding",
+                    "id": "32886727-4e30-43ad-890b-be70aabcf894",
+                    "path": "<XRController>{LeftHand}/primary2DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotation",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "modifier",
+                    "id": "9e156d4f-103f-4b6b-ad0a-b1a71c6c11ef",
+                    "path": "<XRController>{LeftHand}/{primary2DAxisClick}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotation",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "One Modifier",
+                    "id": "2fe2b22f-a482-4eca-9b76-eb582cdf3b95",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OneHandedFlying",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "binding",
+                    "id": "2bf277b1-584b-437e-b466-e4e12c0eb19a",
+                    "path": "<XRController>{RightHand}/primary2DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OneHandedFlying",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "modifier",
+                    "id": "9e0e3334-ea08-45a8-92f7-75b8ba9284ad",
+                    "path": "<XRController>{RightHand}/{primary2DAxisClick}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OneHandedFlying",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "7327727c-d93e-4f9b-8d3c-e5bd951d15d8",
+            "actions": [
+                {
+                    "name": "ToggleMenu",
+                    "type": "Button",
+                    "id": "de4a6290-261c-4ec0-9071-896ec3d3fc5f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ToolSelection",
+                    "type": "Button",
+                    "id": "2ba18163-9881-400c-a906-c90d8a642844",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ZoomActionRight",
+                    "type": "Button",
+                    "id": "55f9cddf-f8ba-4b98-b67d-a7a5107f4792",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ZoomActionLeft",
+                    "type": "Button",
+                    "id": "ffbf9c18-d56b-4fe5-9bd8-f2a3b5cad6d4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "8d802d4a-1573-4974-a0dd-980f37840b0f",
+                    "path": "<XRController>/menuButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "3ac37f1a-9d62-4ca9-835f-e2a348341eff",
+                    "path": "1DAxis(whichSideWins=1)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToolSelection",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "762ee23a-6e38-4572-93ac-62d456dcd964",
+                    "path": "<XRController>{RightHand}/grip",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToolSelection",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "abd68f37-e422-4f55-b9b3-a3fe18190dcb",
+                    "path": "<XRController>{RightHand}/gripButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToolSelection",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "17debe91-386f-4fa2-b4c5-064f5cea5b33",
+                    "path": "<XRController>{RightHand}/triggerButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ZoomActionRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "84c10b08-4a4c-4b75-b5f0-0fc98a29a84d",
+                    "path": "<XRController>{LeftHand}/triggerButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ZoomActionLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "BrushSelect",
+            "id": "ff4464f4-dfb8-4ef1-8d4f-0869b9f65854",
+            "actions": [
+                {
+                    "name": "AdjustBrush",
+                    "type": "PassThrough",
+                    "id": "32668129-734e-4e04-867f-fff9496382ac",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RightTouchPadClicked",
+                    "type": "Button",
+                    "id": "059fffe7-22fd-4e19-8450-b72b1336e81c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ActivateBrushing",
+                    "type": "Button",
+                    "id": "0a0ec694-0244-4575-8ddd-8dce203ddb80",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "2D Vector",
+                    "id": "88301139-a99b-4ef2-a5a2-5ebbbaa07350",
+                    "path": "2DVector(mode=2)",
+                    "interactions": "",
+                    "processors": "StickDeadzone",
+                    "groups": "",
+                    "action": "AdjustBrush",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "d98d3558-bcce-4f52-8dd3-115e9e3750a6",
+                    "path": "<XRController>{RightHand}/Primary2DAxis/y",
+                    "interactions": "",
+                    "processors": "Clamp(max=1)",
+                    "groups": "",
+                    "action": "AdjustBrush",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "d0bfea3a-6078-46d1-892f-fa867610759f",
+                    "path": "<XRController>{RightHand}/Primary2DAxis/y",
+                    "interactions": "",
+                    "processors": "Clamp(min=-1),Invert",
+                    "groups": "",
+                    "action": "AdjustBrush",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "2288997a-5bdd-49c7-aa2f-d361563e6684",
+                    "path": "<XRController>{RightHand}/Primary2DAxis/x",
+                    "interactions": "",
+                    "processors": "Clamp(min=-1),Invert,AxisDeadzone(min=0.4,max=1)",
+                    "groups": "",
+                    "action": "AdjustBrush",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "4c1c0db4-178a-4043-b576-a821ce332498",
+                    "path": "<XRController>{RightHand}/Primary2DAxis/x",
+                    "interactions": "",
+                    "processors": "Clamp(max=1),AxisDeadzone(min=0.4,max=1)",
+                    "groups": "",
+                    "action": "AdjustBrush",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "One Modifier",
+                    "id": "f85a2d1d-f708-44ea-af10-bded5a50c905",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightTouchPadClicked",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "binding",
+                    "id": "483f4628-b368-49b2-8861-f3d1ab3470c0",
+                    "path": "<XRController>{RightHand}/primary2DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightTouchPadClicked",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "modifier",
+                    "id": "956635a7-8efc-4bde-b55e-9d9fe3c44e7a",
+                    "path": "<XRController>{RightHand}/{primary2DAxisClick}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightTouchPadClicked",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "3feb8e91-3df2-47db-a13a-2f705fb70dd5",
+                    "path": "<XRController>{RightHand}/triggerButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ActivateBrushing",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

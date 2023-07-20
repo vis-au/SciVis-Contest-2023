@@ -1,0 +1,259 @@
+syntax = "proto3";
+
+package brain;
+option go_package = "./brain";
+
+/*
+* The brain service have methods for requesting the data in the network.
+* All methods for neurons and synapses in the network are accessed through this service.
+*/
+service Brain {
+    rpc NeuronsStream (NeuronsQuery) returns (stream GenericNeuron) {}
+    rpc Stratum (StratumQuery) returns (stream Node) {}
+
+    rpc AllSynapsesStream (AllSynapsesQuery) returns (stream Synapse) {}
+
+    // Stream of all synapses that changed between timestep1 and timestep2. Concecutive timesteps are precomputed and much faster.
+    rpc DeltaSynapsesStream (DeltaSynapsesQuery) returns (stream Synapse) {}
+
+    // Stream of clusters at specified granularity and timestep
+    // Kind of deprecated, stratum does the same thing
+    rpc Clusters (ClustersQuery) returns (stream Cluster) {}
+
+    // Stream of edges between clusters at specified granularity and timestep
+    rpc ClusterEdges (ClusterEdgesQuery) returns (stream ClusterEdge) {}
+
+    // Stream of children nodes of a cluster from a given granularity
+    rpc NodesInCluster (NodesInClusterQuery) returns (stream Cluster) {}
+
+    // Stream of edges inside a cluster from a given granularity
+    rpc EdgesInCluster (EdgesInClusterQuery) returns (stream ClusterEdge) {}
+
+    // Stream neuron leaves assigned to the specified cluster at the specified granularity level
+    rpc Leaves (LeavesQuery) returns (stream GenericNeuron) {}
+
+    // first sends average, then max then min
+    rpc Billboard (BillboardQuery) returns (stream Pip) {}
+
+    rpc Pips (PipsQuery) returns (stream Pip) {}
+
+    rpc Splines (SplinesQuery) returns (stream Spline) {}
+}
+
+message BillboardQuery {
+    string simulation = 1;
+    string attribute = 2;               // attribute used for aggregation
+    uint32 granularity = 3;             // same as community_level
+    repeated uint32 cluster_ids = 4;    // if length is one, we return precomputed values, if length is bigger we try to aggregate (coming soon)
+    uint32 n_pips = 5;
+    string aggregation = 6;             // can be 'min', 'max' or 'avg'
+}
+
+// Pips can either represent clusters or simple neurons
+message Pip {
+    uint32 timestep = 1;
+    string simulation = 2;
+    uint32 granularity = 3;  
+    uint32 z_order = 4;
+    uint32 id = 5;
+    string attribute = 6;               // the field that was requested
+    float value = 7;
+}
+
+message LeavesQuery {
+    uint32 timestep = 1;        // for now the structure is the same for all timesteps so the same leaves will be output for any timestep
+    string simulation = 2;
+    uint32 granularity = 3;     // can be one of [1, 2, 3, 4]
+    repeated uint32 cluster_ids = 4;      // cluster ids on the given granularity level
+}
+
+message EdgesInClusterQuery {
+    uint32 timestep = 1;
+    uint32 granularity = 2;     // can be one of [1, 2, 3, 4]
+    string simulation = 3;
+    uint32 cluster_id = 4;      // cluster id on the given granularity level
+}
+
+message NodesInClusterQuery {
+    uint32 timestep = 1;
+    string simulation = 2;
+    uint32 granularity = 3;     // can be one of [1, 2, 3, 4]
+    uint32 cluster_id = 4;
+    repeated string projection = 5;    // list of fields to be returned. Possible fields are the basic ones suffixed with either "max_", "min_", or "avg_"
+}
+
+message ClustersQuery {
+    uint32 timestep = 1;
+    uint32 granularity = 2;     // can be one of [0, 1, 2, 3, 4]; 0 meaning the highest granularity (all 50,000 neurons) and 4 meaning lowest (only ~10 clusters)
+    string simulation = 3;
+    repeated string projection = 4;     // list of fields to be returned. Possible fields are the basic ones suffixed with either "max_", "min_", or "avg_"
+}
+
+message Cluster {
+    uint32 cluster_id = 1;
+    uint32 parent_cluster_id = 2;
+    uint32 leaves_count = 3;
+    uint32 children_count = 4;
+
+    float max_fired = 5;
+    float max_fired_fraction = 6;
+    float max_activity = 7;
+    float max_dampening = 8;
+    float max_current_calcium = 9;
+    float max_target_calcium = 10;
+    float max_synaptic_input = 11;
+    float max_background_input = 12;
+    float max_grown_axons = 13;
+    float max_connected_axons = 14;
+    float max_grown_dendrites = 15;
+    float max_connected_dendrites = 16;
+
+    float min_fired = 17;
+    float min_fired_fraction = 18;
+    float min_activity = 19;
+    float min_dampening = 20;
+    float min_current_calcium = 21;
+    float min_target_calcium = 22;
+    float min_synaptic_input = 23;
+    float min_background_input = 24;
+    float min_grown_axons = 25;
+    float min_connected_axons = 26;
+    float min_grown_dendrites = 27;
+    float min_connected_dendrites = 28;
+
+    float avg_fired = 29;
+    float avg_fired_fraction = 30;
+    float avg_activity = 31;
+    float avg_dampening = 32;
+    float avg_current_calcium = 33;
+    float avg_target_calcium = 34;
+    float avg_synaptic_input = 35;
+    float avg_background_input = 36;
+    float avg_grown_axons = 37;
+    float avg_connected_axons = 38;
+    float avg_grown_dendrites = 39;
+    float avg_connected_dendrites = 40;
+
+    uint32 timestep = 41;
+}
+
+message ClusterEdgesQuery {
+    uint32 timestep = 1;
+    uint32 granularity = 2;
+    string simulation = 3;
+}
+
+message ClusterEdge {
+    uint32 from_id = 1;
+    uint32 to_id = 2;
+    uint32 weight = 3;
+    uint32 granularity = 4;
+}
+
+message AllNeuronsQuery {
+    uint32 timestep = 1;
+    string simulation = 2;
+}
+
+message NeuronsQuery {
+    string simulation = 1;
+    repeated string filters = 2; // list of strings on this form ["fired = true", "activity > -60.0", ...]
+    repeated string projection = 3; // list of fields that are returned, e.g. ["dampening", "grown_axons", ...]
+    bool gimme_everything = 4; // if set returns all fields, equivalent to projection with every field specified
+}
+
+message StratumQuery {
+    string simulation = 1;
+    uint32 granularity = 2;
+    uint32 timestep = 3;
+    string attribute = 4;       // in addition to neuron properties, can also query structure with 'community_levelX', 'leaves_count', and 'children_count'
+    string filter = 5;
+}
+
+message Node {
+    uint32 id = 1;
+    float value = 3;
+}
+
+
+/*
+* A neuron is a node in the brain graph.
+* It can be connected with other neurons via Synapses at a certain timestep.
+*/
+message Neuron {
+    uint32 id = 1;
+    float calcium = 2;
+    float fired_fraction = 3;
+}
+
+message GenericNeuron {
+    uint32 id = 1;
+    bool fired = 2;
+    float fired_fraction = 3;
+    float activity = 5;
+    float dampening = 6;
+    float current_calcium = 7;
+    float target_calcium = 8;
+    float synaptic_input = 9;
+    float background_input = 10;
+    float grown_axons = 11;
+    int32 connected_axons = 12;
+    float grown_dendrites = 13;
+    int32 connected_dendrites = 14;
+    int32 community_level1 = 15;
+    int32 community_level2 = 16;
+    int32 community_level3 = 17;
+    int32 community_level4 = 18;
+    uint32 timestep = 19;
+}
+
+
+message AllSynapsesQuery {
+    uint32 timestep = 1;
+    string simulation = 2;
+}
+
+/*
+* A synapse is a link connecting two Neurons in the brain graph at a certain timestep.
+*/
+message Synapse {
+    uint32 from_id = 1;
+    uint32 to_id = 2;
+    uint32 weight = 3;
+}
+
+
+message DeltaSynapsesQuery {
+    uint32 timestep1 = 1;
+    uint32 timestep2 = 2;
+    string simulation = 3;
+}
+
+message PipsQuery {
+    uint32 n_pips = 1;
+    uint32 granularity = 2;
+    string simulation = 3;
+    string attribute = 4;
+    string aggregation = 5;             // could be 'min', 'max' or 'avg'
+}
+
+message SplinesQuery {
+    uint32 timestep = 1;
+    uint32 granularity = 2;
+    string simulation = 3;
+    uint32 cluster_id = 4;
+}
+
+message Spline {
+    string from_id = 1;
+    string to_id = 2;
+    uint32 weight = 3;
+    string points = 4;
+    // repeated Point points = 4;
+}
+
+// message Point {
+//     float x = 1;
+//     float y = 2;
+//     float z = 3;
+// }

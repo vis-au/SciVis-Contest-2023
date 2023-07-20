@@ -1,0 +1,10 @@
+port = 50051
+
+[memgraph]
+host = "localhost"
+port = 7687
+
+[mongodb]
+connection_string = "mongodb://localhost:27017"
+db_name = "calcium"
+collection_name = "level_0_nodes_per_step"
